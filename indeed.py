@@ -30,7 +30,7 @@ def max_indeed_pages():
 
  return max_page
 
-"""/////extract jobs/////""" 
+"""/////extract jobs/////"""
 
 def extract_indeed_jobs(max_page):
     jobs= []
@@ -41,21 +41,24 @@ def extract_indeed_jobs(max_page):
 
        soup = BeautifulSoup(result.text, "html.parser")
     
-    """get title"""
+       """get title"""
        results = soup.find_all("div", {"class":"jobsearch-SerpJobCard"})
        
+       
        for result in results:
-         title=result.find("h2", {"class":"title"}).find("a")["title"]
-
-    """get company"""     
-         company= result.find("span", {"class":"company"})
+        title=result.find("h2", {"class":"title"}).find("a")["title"]
+        
+        """get company"""
+        company= result.find("span", {"class":"company"})
            
-         company_anchor = company.find("a") 
+        company_anchor = company.find("a") 
          
-         if company_anchor is not None:
-           company= (str(company.find("a").string))
-         else:
-           company= (str(company.string))  
+        if company_anchor is not None:
+         company= (str(company.find("a").string))
+        else:
+         company= (str(company.string))  
          
-         company=company.strip()
-    return jobs
+        company=company.strip()       
+
+        job ={"title": title, "company": company}
+        print(job)
