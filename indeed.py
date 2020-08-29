@@ -62,7 +62,7 @@ def extract_jobs(max_page):
 
     """set URL of each page in requests, soup way 리겟텍뷰파""" 
     for page in range(max_page):
-     print(f"Scrapping page {page}")
+     print(f"Scrapping Indeed : Page {page}")
      result = requests.get(f"{INDEED_URL}&start={page*LIMIT}")
 
      soup = BeautifulSoup(result.text, "html.parser")
