@@ -9,7 +9,7 @@ LIMIT = 50
 INDEED_URL = f"https://www.indeed.com/jobs?as_and=python&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=all&st=&salary=&radius=25&l=&fromage=any&limit={LIMIT}&sort=&psf=advsrch&from=advancedsearch"
 
 
-"""/////return max_page/////"""
+"""/////page buttons/////"""
 
 def get_last_page():
 
@@ -54,7 +54,7 @@ def extract_job(html):
 
 
 
-"""/////extract jobs/////"""
+"""/////list: job boxes in a page/////"""
 
 def extract_jobs(max_page):
     
@@ -67,17 +67,18 @@ def extract_jobs(max_page):
 
      soup = BeautifulSoup(result.text, "html.parser")
     
-     """get title"""
+     """get inform. from extract_job"""
+     """a result=a job box"""  
      results = soup.find_all("div", {"class":"jobsearch-SerpJobCard"})
-       
+
      for result in results:
-      job= extract_job(result)  
+      job= extract_job(result) #job = one job dict   
       jobs.append(job)
-    return jobs   
+     return jobs #list of job dicts   
 
 def get_jobs():
  last_page = get_last_page()
 
- jobs=extract_jobs(last_page)
+ jobs=extract_jobs(last_page) #list of job dicts, till last page
 
  return jobs
